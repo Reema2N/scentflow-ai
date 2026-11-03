@@ -6,8 +6,6 @@
 
 ScentFlow-AI turns perfume details and campaign goals into **brand-aligned Arabic marketing content** for Instagram and Email. Instead of relying on a single large prompt, it coordinates specialized AI agents through a **LangGraph workflow** with retrieval, market research, structured validation, targeted revision, and human approval.
 
-> **Repository status:** This public version contains the AI workflow and supporting modules, **not the original Streamlit frontend**. The complete interactive application, including its human-review interface, cannot currently be launched from this repository alone.
-
 ## ✨ Highlights
 
 - **Specialized agents** for product analysis, audience analysis, campaign strategy, content generation, review, and revision.
@@ -47,7 +45,7 @@ flowchart TD
 
 The LangGraph workflow uses a shared `CampaignState` and a `MemorySaver` checkpointer. The **automatic** revision limit defaults to three; human-requested revisions follow a separate approval path.
 
-**Important:** Input preparation, sanitization, translation, and the interactive human-review/resume flow were handled partly by the original frontend, which is not included in this public repository.
+The Streamlit frontend handles input preparation, sanitization, translation, and the human-review flow before resuming the workflow.
 
 ### Agent responsibilities
 
@@ -103,14 +101,21 @@ The tested scenarios included end-to-end execution, invalid input handling, huma
 | Market research | Tavily |
 | Observability | LangSmith |
 | Data processing | Pandas |
-| Original interface (not published) | Streamlit |
+| Interface | Streamlit |
 
 ## 📂 Repository Structure
 
 ```text
 ScentFlow-AI/
 ├── agents/           # Specialized agents
-├── data/             # Publishable project data (review before upload)
+├── data/             # Perfume dataset and brand guidelines
+├── frontend/         # Streamlit application
+│   ├── app.py        # Entry point and step routing
+│   ├── session.py    # Session state
+│   ├── assets/       # Stylesheet
+│   ├── components/   # Reusable UI pieces
+│   ├── services/     # Input handling, translation, and workflow calls
+│   └── views/        # Input, review, and final screens
 ├── prompts/          # Agent instructions and prompts
 ├── rag/              # Retrieval and reranking
 ├── schemas/          # Pydantic input/output contracts
@@ -120,8 +125,6 @@ ScentFlow-AI/
 ├── requirements.txt  # Python dependencies
 └── README.md
 ```
-
-The `frontend/` directory, `.env`, virtual environments, caches, and other local-only artifacts are excluded from this public version.
 
 ## ⚙️ Setup
 
@@ -147,7 +150,7 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Create a local `.env` file in the project root (**never commit this file**):
+Copy `.env.example` to `.env` in the project root and add your keys (**never commit this file**):
 
 ```dotenv
 OPENAI_API_KEY=your_openai_api_key
@@ -157,9 +160,19 @@ LLM_MODEL=gpt-4o-mini
 
 `config.py` also supports `LLM_API_KEY` and `LLM_BASE_URL` for an OpenAI-compatible endpoint. Tavily research can be skipped when unavailable, but LLM-dependent steps still require a valid model endpoint.
 
+Build the perfume knowledge base once:
+
+```bash
+python -m rag.ingest
+```
+
+This reads `data/Dataset/Perfume_Dataset.csv` and creates the local Chroma database. Brand guidelines are loaded from `data/Guidelines/brand_guidelines.md`. Without these files, the workflow runs without retrieved perfume context or brand-specific rules.
+
 ### Running the application
 
-The original application used Streamlit to prepare inputs and resume the LangGraph workflow after human review. **The frontend is not part of this public release**, and a standalone end-to-end CLI entry point has not been verified. Consequently, the complete interactive workflow is **not currently runnable using only the published files**.
+```bash
+streamlit run frontend/app.py
+```
 
 ## 🔧 Engineering Lessons
 
@@ -172,7 +185,7 @@ The original application used Streamlit to prepare inputs and resume the LangGra
 
 The evaluated system supports **Instagram and Email campaign content**, with human approval before completion. It does **not** automatically publish posts, manage a CRM, or predict sales.
 
-Potential next steps include a redesigned frontend, a broader perfume knowledge base, stronger Email-specific validation, and formal evaluation of a separately prototyped image-generation agent. **Image generation was not integrated into the evaluated end-to-end workflow.**
+Potential next steps include a broader perfume knowledge base, stronger Email-specific validation, and formal evaluation of a separately prototyped image-generation agent. **Image generation was not integrated into the evaluated end-to-end workflow.**
 
 ## 👥 Authors
 
