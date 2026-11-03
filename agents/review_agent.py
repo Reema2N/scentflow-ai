@@ -40,20 +40,35 @@ review_prompt = PromptTemplate(template=REVIEW_PROMPT,
 review_chain = (review_prompt | llm.with_structured_output(ReviewOutput))
 
 # Numeric Feedback Filter
+INSTAGRAM_COUNT_PATTERN = (
+    r"\d+\s*(?:-\s*\d+\s*)?(?:words?|hashtags?|emojis?)\b"
+    r"|\b(?:word|hashtag|emoji)\s+(?:count|limit)\b"
+    r"|\b(?:number|count)\s+of\s+(?:words?|hashtags?|emojis?)\b"
+    r"|\b(?:too\s+(?:many|few)|fewer\s+than|less\s+than|more\s+than"
+    r"|at\s+least|at\s+most|minimum|maximum|exceeds?)\b"
+    r"[^.]*\b(?:words?|hashtags?|emojis?)\b"
+    r"|\b(?:caption|post|text)\s+length\b"
+    r"|\blength\s+of\s+the\s+(?:caption|post|text)\b"
+    r"|\btoo\s+(?:long|short)\b"
+)
+
+
 def is_numeric_instagram_issue(issue: ReviewIssue) -> bool:
     """
-    Detect Instagram numeric-rule feedback accidentally
+    Detect Instagram count or length feedback accidentally
     produced by the LLM.
 
-    Word boundaries prevent valid terms such as
-    'wording' from matching the keyword 'word'.
+    Other feedback stays, including issues about a specific
+    word and all feedback for other channels.
     """
 
-    combined_text = (f"{issue.issue} {issue.violated_rule}").lower()
+    if issue.target != "instagram":
+        return False
 
-    numeric_pattern = (r"\b("r"words?|"r"hashtags?|"r"emojis?|"r"length"r")\b")
+    combined_text = f"{issue.issue} {issue.violated_rule}"
 
-    return bool(re.search(numeric_pattern,combined_text,flags=re.IGNORECASE,) )
+    return bool(re.search(INSTAGRAM_COUNT_PATTERN, combined_text, flags=re.IGNORECASE))
+
 
 # Main Agent Function
 def review_content(product_information: ProductInput, campaign_strategy: CampaignStrategyOutput, generated_content: ContentGenerationOutput,) -> ReviewOutput:
