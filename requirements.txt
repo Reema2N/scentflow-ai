@@ -1,0 +1,47 @@
+# ==============================
+# LangChain / LangGraph
+# ==============================
+langchain
+langchain-core
+langchain-openai
+langgraph
+langchain-community
+
+# ==============================
+# LLM / Configuration
+# ==============================
+openai
+python-dotenv
+pydantic
+
+# ==============================
+# RAG / Vector Search
+# ==============================
+sentence-transformers
+torch
+transformers
+huggingface-hub
+langchain-chroma
+langchain-huggingface
+emoji
+# ==============================
+# Data Processing
+# ==============================
+pandas
+numpy
+
+# ==============================
+# External Web Search
+# ==============================
+tavily-python
+
+# ==============================
+# Observability
+# ==============================
+langsmith
+
+# ==============================
+# streamlit
+# ==============================
+streamlit
+deep-translator
