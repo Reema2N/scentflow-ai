@@ -1,0 +1,124 @@
+.stApp,
+.stApp * {
+    direction: rtl !important;
+    text-align: right !important;
+}
+.centered-title,
+.centered-title * {
+    text-align: center !important;
+}
+div[data-baseweb="select"] {
+    direction: rtl !important;
+    text-align: right !important;
+}
+.stButton,
+div[st-eval-id] {
+    text-align: right !important;
+}
+/* ================================
+   Slogan Card
+   ================================ */
+.slogan-card {
+    background-color: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center !important;
+    margin-bottom: 25px;
+}
+.slogan-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center !important;
+    margin: 0;
+}
+/* ================================
+   Instagram Card
+   ================================ */
+.instagram-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 0;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.instagram-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.instagram-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(
+        45deg,
+        #f09433,
+        #e6683c,
+        #dc2743,
+        #cc2366,
+        #bc1888
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.instagram-username {
+    font-weight: bold;
+    font-size: 14px;
+    color: #262626;
+}
+.instagram-body {
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #262626;
+    white-space: pre-wrap;
+}
+.instagram-hashtags {
+    color: #00376b;
+    font-weight: 500;
+    margin-top: 10px;
+    direction: ltr !important;
+    text-align: right !important;
+}
+/* ================================
+   Email Card
+   ================================ */
+.email-card {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.email-header {
+    background-color: #f3f4f6;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+.email-subject {
+    font-size: 16px;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 4px;
+}
+.email-meta {
+    color: #6b7280;
+    font-size: 13px;
+}
+.email-body {
+    padding: 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #374151;
+    white-space: pre-wrap;
+}

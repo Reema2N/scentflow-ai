@@ -1,6 +1,7 @@
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # Virtual environment
 venv/
@@ -27,6 +28,8 @@ Thumbs.db
 # Logs
 *.log
 
+# Streamlit secrets
+.streamlit/secrets.toml
 
 # Local vector database storage
 chroma_db/
