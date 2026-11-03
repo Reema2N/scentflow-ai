@@ -174,6 +174,12 @@ This reads `data/Dataset/Perfume_Dataset.csv` and creates the local Chroma datab
 streamlit run frontend/app.py
 ```
 
+To preview the review and final screens with sample content, without an API key:
+
+```bash
+streamlit run frontend/preview.py
+```
+
 ## 🔧 Engineering Lessons
 
 - **Over-strict AI review:** Refined prompts to distinguish clear violations from acceptable creative variation.
