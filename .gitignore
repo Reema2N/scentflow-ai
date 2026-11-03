@@ -27,21 +27,10 @@ Thumbs.db
 # Logs
 *.log
 
-# Frontend (excluded temporarily)
-frontend/
-
-# Streamlit local secrets
-.streamlit/secrets.toml
 
 # Local vector database storage
 chroma_db/
 chroma_storage/
-
-# Excluded frontend (will be redesigned)
-frontend/
-
-# Streamlit secrets
-.streamlit/secrets.toml
 
 # Generated Chroma vector database
 data/processed/chroma_db/
