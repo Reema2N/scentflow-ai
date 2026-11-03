@@ -61,7 +61,7 @@ The Streamlit frontend handles input preparation, sanitization, translation, and
 
 ## 🔎 Retrieval & Quality Controls
 
-**Perfume RAG.** Perfume records are embedded using `sentence-transformers/all-mpnet-base-v2` and stored in Chroma. The system retrieves **10** candidates, reranks them by fragrance-note matches, and passes the **top 5** to downstream agents. Retrieved profiles are supporting context, not verified facts about a newly submitted perfume.
+**Perfume RAG.** Perfume records are embedded using `sentence-transformers/all-mpnet-base-v2` and stored in Chroma. The system retrieves **10** candidates, reranks them by fragrance-note matches, and passes the **top 5** to downstream agents. Retrieved profiles are supporting context, not verified facts about a newly submitted perfume. The included test dataset combines collected and AI-generated records (see [data/README.md](data/README.md)).
 
 **Hybrid review.** The LLM checks meaning, brand alignment, language, and unsupported claims. Python validators handle measurable Instagram rules such as caption length, hashtags, and emoji counts.
 
