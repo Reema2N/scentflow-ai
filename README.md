@@ -6,6 +6,12 @@
 
 ScentFlow-AI turns perfume details and campaign goals into **brand-aligned Arabic marketing content** for Instagram and Email. Instead of relying on a single large prompt, it coordinates specialized AI agents through a **LangGraph workflow** with retrieval, market research, structured validation, targeted revision, and human approval.
 
+## 📸 Screenshots
+
+| Campaign input | Human review | Revision |
+| --- | --- | --- |
+| ![Campaign input form](docs/images/input-form.png) | ![Generated content review](docs/images/review.png) | ![Human revision result](docs/images/revision.png) |
+
 ## ✨ Highlights
 
 - **Specialized agents** for product analysis, audience analysis, campaign strategy, content generation, review, and revision.
@@ -43,9 +49,9 @@ flowchart TD
     H -->|Reject with feedback| X
 ```
 
-The LangGraph workflow uses a shared `CampaignState` and a `MemorySaver` checkpointer. The **automatic** revision limit defaults to three; human-requested revisions follow a separate approval path.
+The LangGraph workflow uses a shared `CampaignState` and a `MemorySaver` checkpointer. The revision limit defaults to three. Once reached, content goes directly to the human reviewer, who can still request changes.
 
-The Streamlit frontend handles input preparation, sanitization, translation, and the human-review flow before resuming the workflow.
+Brand guidelines also inform content generation, AI review, and revision. The Streamlit frontend handles input preparation, sanitization, translation, and the human-review flow before resuming the workflow.
 
 ### Agent responsibilities
 
